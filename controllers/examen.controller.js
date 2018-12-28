@@ -5,6 +5,7 @@ var util = require('util');
 var math = require('mathjs');
 
 var mFisica = require('../models/fisica.model');
+var mCalculo = require('../models/calculo.model');
 var fisicaController = require('../controllers/fisica.controller');
 
 function solve(arrData, method){
@@ -82,30 +83,49 @@ function examenFisica(req, res, next) {
 function examenCalculo(req, res, next) {
   console.log('params:', req.params);
 
-  var materia = "fisica i";//req.params.materia;
-  var grupos = "1°QFB, 1°QBT"
+  var id = dec2bin(3);
+
+  var materia = "calculo";//req.params.materia;
+  var grupos = "2°QBT, 3°ICM"
   var unidades = {
-    "1": "unidad i"
+    "i": "unidad i",
+    "ii": "unidad ii",
+    "iii": "unidad iii",
+    "o": "ordinario",
+    "x": "extraordinario",
+    "t": "titulo"
   };
 
   var unidad = unidades[req.params.unidad] || "";
-  var nPreguntas = req.params.n_preguntas;
+  var nPreguntas = 7;//req.params.n_preguntas || mFisica[req.params.unidad].length;
+  var random = true;
+
   var nVersiones = req.params.n_versiones;
   var nPersonas = req.params.n_personas;
 
+  var items = mCalculo[req.params.unidad].slice(0, nPreguntas);
+  if(random){
+    items = shuffle(items);
+  }
+  arrPreguntas = [];
 
-  mFisica.forEach(setPregunta);
+  items.forEach(setPreguntaResOriginal);
 
-  res.render('examen', { materia: materia, unidad: unidad, grupos: grupos, preguntas: arrPreguntas });
+  res.render('examen', { id: id, materia: materia, unidad: unidad, grupos: grupos, preguntas: arrPreguntas });
 };
 
 function examenElectromagnetismo(req, res, next) {
   console.log('params:', req.params);
 
-  var materia = "fisica i";//req.params.materia;
-  var grupos = "1°QFB, 1°QBT"
+  var materia = "calculo";//req.params.materia;
+  var grupos = "2°QBT, 3°ICM"
   var unidades = {
-    "1": "unidad i"
+    "i": "unidad i",
+    "ii": "unidad ii",
+    "iii": "unidad iii",
+    "o": "ordinario",
+    "x": "extraordinario",
+    "t": "titulo"
   };
 
   var unidad = unidades[req.params.unidad] || "";

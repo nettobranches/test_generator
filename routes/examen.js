@@ -6,7 +6,9 @@ var examenController = require('../controllers/examen.controller');
 
 
 /* GET users listing. */
-router.get('/fisica/:unidad/:n_preguntas/:n_versiones/:n_personas', examenController.examenFisica);
+router.get('/fisica/:unidad/:n_preguntas/:is_random', examenController.examenFisica);
+router.get('/electro/:unidad/:n_preguntas/:is_random', examenController.examenElectromagnetismo);
+router.get('/calculo/:unidad/:n_preguntas/:is_random', examenController.examenCalculo);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
