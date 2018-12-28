@@ -2,8 +2,8 @@
   "1":[
     {
       "pregunta": "¿Cuál es la altura en centímetros de una mujer que mide 5 pies y 6 pulgadas?",
-      "valores": {},
-      "metodo": "ft_to_cm"
+      "valores": [5, 6],
+      "metodo": "ft_inch_to_cm"
     }
   ]
 }
