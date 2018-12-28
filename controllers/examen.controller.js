@@ -11,6 +11,29 @@ function solve(arrData, method){
   return fisicaController[method](arrData);
 }
 
+function dec2bin(dec){
+    return (dec >>> 0).toString(2);
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 function setPreguntaResOriginal(item){
 
     var pregunta = item.pregunta;
@@ -22,10 +45,11 @@ function setPreguntaResOriginal(item){
 
     arrPreguntas.push( {pregunta: pregunta, respuesta: respuesta} )
 }
-var arrPreguntas = [];
+var arrPreguntas;
 
 function examenFisica(req, res, next) {
 
+  var id = dec2bin(3);
   var materia = "fisica i";//req.params.materia;
   var grupos = "1°QFB, 1°QBT"
   var unidades = {
@@ -38,14 +62,21 @@ function examenFisica(req, res, next) {
   };
 
   var unidad = unidades[req.params.unidad] || "";
-  var nPreguntas = req.params.n_preguntas;
+  var nPreguntas = 7;//req.params.n_preguntas || mFisica[req.params.unidad].length;
+  var random = true;
+
   var nVersiones = req.params.n_versiones;
   var nPersonas = req.params.n_personas;
 
+  var items = mFisica[req.params.unidad].slice(0, nPreguntas);
+  if(random){
+    items = shuffle(items);
+  }
+  arrPreguntas = [];
 
-  mFisica.forEach(setPreguntaResOriginal);
+  items.forEach(setPreguntaResOriginal);
 
-  res.render('examen', { materia: materia, unidad: unidad, grupos: grupos, preguntas: arrPreguntas });
+  res.render('examen', { id:id, materia: materia, unidad: unidad, grupos: grupos, preguntas: arrPreguntas });
 };
 
 function examenCalculo(req, res, next) {
