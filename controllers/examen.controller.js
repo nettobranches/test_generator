@@ -63,13 +63,14 @@ function examenFisica(req, res, next) {
   };
 
   var unidad = unidades[req.params.unidad] || "";
-  var nPreguntas = 7;//req.params.n_preguntas || mFisica[req.params.unidad].length;
+  var tPreguntas = mFisica[req.params.unidad].length;
+  var nPreguntas = req.params.n_preguntas || tPreguntas;
   var random = true;
 
   var nVersiones = req.params.n_versiones;
   var nPersonas = req.params.n_personas;
 
-  var items = mFisica[req.params.unidad].slice(0, nPreguntas);
+  var items = nPreguntas < tPreguntas ? mFisica[req.params.unidad].slice(0, nPreguntas) : mFisica[req.params.unidad];
   if(random){
     items = shuffle(items);
   }

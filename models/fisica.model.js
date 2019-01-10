@@ -11,14 +11,14 @@ var unidad_i = [
         original: [1600, 84]
         // random: [ Math.randomInt(200, 600), Math.randomInt(60, 180)]
         },
-    method: "convertMtoFt"
+    method: "convertCm3toInch3"
     },
     {pregunta: "La densidad del bronce es de %d g/cm3. ¿Cuál es su densidad en kilogramos por metro cúbico?",
     datos: {
         original: [8.89 ]
         // random: [ Math.randomInt(200, 600), Math.randomInt(60, 180)]
         },
-    method: "convertMtoFt"
+    method: "convertGcm3toKmm3"
     },
     {pregunta: "Una mujer camina %d km hacia el Este y después camina %d km hacia el Norte. Encuentre el desplazamiento resultante ",
     datos: {
