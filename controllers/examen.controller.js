@@ -140,8 +140,13 @@ function examenElectromagnetismo(req, res, next) {
   res.render('examen', { materia: materia, unidad: unidad, grupos: grupos, preguntas: arrPreguntas });
 };
 
+function getById(req, res, next){
+
+};
+
 module.exports = {
   examenFisica: examenFisica,
   examenCalculo: examenCalculo,
   examenElectromagnetismo: examenElectromagnetismo,
+  getById: getById
 }
