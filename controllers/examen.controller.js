@@ -49,6 +49,19 @@ function setPreguntaResOriginal(item){
 
     arrPreguntas.push( {pregunta: pregunta, respuesta: respuesta} )
 }
+
+function setPreguntaResCalculo(item){
+
+    var pregunta = item.pregunta;
+    item.operacion.forEach(function(val){
+      pregunta = util.format( pregunta, val );
+    })
+
+    var respuesta = solve(item.datos.original, item.method)
+
+    arrPreguntas.push( {pregunta: pregunta, respuesta: respuesta} )
+}
+
 var arrPreguntas;
 
 function examenFisica(req, res, next) {
@@ -113,7 +126,7 @@ function examenCalculo(req, res, next) {
   }
   arrPreguntas = [];
 
-  items.forEach(setPreguntaResOriginal);
+  items.forEach(setPreguntaResCalculo);
 
   res.render('examen', { id: id, materia: materia, unidad: unidad, grupos: grupos, preguntas: arrPreguntas });
 };

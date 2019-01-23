@@ -94,6 +94,18 @@ module.exports = {
 	  var simplified = math.simplify( rawRes ).toString();
 	  console.log('simplified', simplified);
 	  var txtRes = "";
+    simplified = simplified.replace("/", "\\over")
+    simplified = simplified.replace("sqrt", "\\sqrt")
+    // simplified = simplified.replace("(", "{")
+    // simplified = simplified.replace(")", "}")
     return "\\(" + simplified + "\\)";
+  },
+  integrar_a: function(arrData){
+    // var dx =
+    var fx = arrData[1]
+    var exp = arrData[2]
+    var dx = math.derivative( fx, "x" ).toString();
+    var simplified = math.simplify("("+ fx + ")^(" + exp + ")" ).toString();
+      return "\\(" + simplified + "\\)";
   }
 }

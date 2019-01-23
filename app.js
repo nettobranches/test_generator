@@ -27,11 +27,12 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use('/assets', [
-  //  express.static(__dirname + '/node_modules/jquery/dist/'),
-    //express.static(__dirname + '/node_modules/materialize-css/dist/'),
+app.use('/assets', [
+    express.static(__dirname + '/node_modules/jquery/dist/'),
+    // express.static(__dirname + '/node_modules/jquery/dist/'),
+    // express.static(__dirname + '/node_modules/materialize-css/dist/'),
 
-//]);
+]);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

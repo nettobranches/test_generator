@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Examen</title>
 
-    <script src="vue.js" type="text/javascript"></script>
+    <script src="/vue.js" type="text/javascript"></script>
     <script src="https://unpkg.com/mathjs@5.1.2/dist/math.min.js"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
 
@@ -65,7 +65,19 @@
             <div> examen de <%= unidad %> <%= grupos %>  </div>
 
            </div>
-          <div class="col-xs-2"> <img src="/fcq.png" ></img> <div> <%= id %> </div> </div>
+          <div class="col-xs-2"> <img src="/fcq.png" ></img>
+            <div>
+              <svg class="barcode"
+                  jsbarcode-format="code128"
+                  jsbarcode-value="<%= id %>"
+                  jsbarcode-textmargin="0"
+                  jsbarcode-width="1.5"
+                  jsbarcode-height="20"
+                  jsbarcode-fontsize="10"
+                  jsbarcode-fontoptions="bold">
+                  </svg>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -96,6 +108,9 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
+    <script src="/JsBarcode.all.min.js"></script>
+    <script>
+        JsBarcode(".barcode").init();
+    </script>
   </body>
 </html>
