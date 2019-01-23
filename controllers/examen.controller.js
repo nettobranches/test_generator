@@ -8,6 +8,9 @@ var mFisica = require('../models/fisica.model');
 var mCalculo = require('../models/calculo.model');
 var fisicaController = require('../controllers/fisica.controller');
 
+
+
+
 function solve(arrData, method){
   return fisicaController[method](arrData);
 }
