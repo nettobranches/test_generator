@@ -3,7 +3,7 @@ var router = express.Router();
 
 var util = require('util');
 var math = require('mathjs');
-
+math.import(require('mathjs-simple-integral'));
 
 module.exports = {
   convertMtoFt: function(arrData){
@@ -83,6 +83,17 @@ module.exports = {
       return r
   },
   integrar: function(arrData){
-    return "\\(" + math.derivative(arrData[0], 'x').toString() + "\\)";
+	  var solveEq = "";
+	  if(arrData.length == 2){
+		  solveEq = arrData[1];
+	  }else{
+		  solveEq = arrData[0];
+	  }
+	  var rawRes = math.integral(solveEq, 'x', {simplify: false}).toString();
+	  console.log('res', rawRes );
+	  var simplified = math.simplify( rawRes ).toString();
+	  console.log('simplified', simplified);
+	  var txtRes = "";
+    return "\\(" + simplified + "\\)";
   }
 }
